@@ -56,8 +56,8 @@ $students = $student->all();
 
                 <label for="">Choose student board</label>
                 <div class="mb-5">
-                    CSM <input type="radio" name="board" value="1">
-                    CSMB<input type="radio" name="board" value="2">
+                    CSM <input type="radio" name="board" checked value="CSM">
+                    CSMB<input type="radio" name="board" value="CSMB">
                     <br><?php if(isset($errors['board'])) echo "<span class='text-danger'>".$errors['board']."</span>" ?><br>
 
                 </div>
