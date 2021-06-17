@@ -25,6 +25,10 @@ if(isset($_GET['student'])){
 
     $student_average = Student::average_grade($student_data->grades);
 
+    $array_grades = explode(',',$student_data->grades);
+
+
+
     $fail = 'Fail';
     $pass = 'Pass';
 
@@ -39,15 +43,50 @@ if(isset($_GET['student'])){
            $updated_student = $student->update($student_average, $fail, $student_data->id);
         }
 
+        $st_id = Student::returnedStudent($id);
+
+        $new_student = $student->find($st_id);
+
+        $dataJSON = json_encode($new_student);
+
+        echo $dataJSON;
+
+    }else{
+        if(count($array_grades) > 2){
+            $grade_pass = [];
+            foreach ($array_grades as $value){
+
+                if($value > 8){
+                    $grade_pass[] = $value;
+                }
+            }
+
+            if(count($grade_pass) > 0){
+                $updated_student = $student->update($student_average, $pass, $student_data->id);
+
+            }else{
+                $updated_student = $student->update($student_average, $fail, $student_data->id);
+
+            }
+        }
+
+        $st_id = Student::returnedStudent($id);
+
+        $new_student = $student->find($st_id);
+
+        $dataJSON = json_encode($new_student);
+
+        echo $dataJSON;
+
     }
 
 
-   $st_id = Student::returnedStudent($id);
-
-   $new_student = $student->find($st_id);
-
-    $dataJSON = json_encode($new_student);
-
-    echo $dataJSON;
+//   $st_id = Student::returnedStudent($id);
+//
+//   $new_student = $student->find($st_id);
+//
+//    $dataJSON = json_encode($new_student);
+//
+//    echo $dataJSON;
 
 }
