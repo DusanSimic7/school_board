@@ -4,8 +4,9 @@
 require_once "autoload.php";
 
 
+$student = new Student();
 
-
+$students = $student->all();
 
 ?>
 
@@ -32,7 +33,12 @@ require_once "autoload.php";
 
 <div class="row">
     <div class="col-12 col-sm-6 col-md-6-col-lg-6">
-        View all students:
+        <b>View all students:</b> <br>
+        <?php foreach ($students as $value) : ?>
+
+        <a href="StudentController.php?student=<?php echo $value->id; ?>"><?php echo $value->name; ?></a><br>
+
+        <?php endforeach; ?>
 
     </div>
 
@@ -57,9 +63,11 @@ require_once "autoload.php";
                 </div>
 
                 <div>
-                    <label for="">Student grades</label><br>
+                    <label for="">Student grades (add with comma)</label><br>
                     <input type="text" name="grades">
                     <br><?php if(isset($errors['grades'])) echo "<span class='text-danger'>".$errors['grades']."</span>" ?><br>
+                    <?php if(isset($errors['limit_grades'])) echo "<span class='text-danger'>".$errors['limit_grades']."</span>" ?><br>
+                    <?php if(isset($errors['grades_rules'])) echo "<span class='text-danger'>".$errors['grades_rules']."</span>" ?><br>
 
                 </div>
 

@@ -3,7 +3,7 @@
 
 class Student extends Database
 {
-    protected $table = "subjects";
+    protected $table = "students";
 
 
     /**
@@ -27,9 +27,28 @@ class Student extends Database
     }
 
 
-    public function findUser($id)
+    /**
+     * @param $id
+     * This method is return Student
+     */
+
+    public function findStudent($id)
     {
-        $this->find($id);
+       return $this->find($id);
+    }
+
+
+    public function update($average, $result, $id)
+    {
+        $this->query("UPDATE students SET  average = :average,
+                            result = :result WHERE id = :id ");
+
+        $this->bind(":average", $average);
+        $this->bind(":result", $result);
+        $this->bind(":id", $id);
+
+
+        $this->execute();
     }
 
 
